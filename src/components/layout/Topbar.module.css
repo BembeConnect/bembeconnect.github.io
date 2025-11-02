@@ -1,0 +1,25 @@
+/* FILE: src/components/layout/Topbar.module.css */
+
+/* Oben fixiert wie gewünscht */
+.stickyWrap {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+/* HudBox-Overrides für die Topbar:
+   - keine Rundung
+   - etwas geringere Schatten
+*/
+.topbar {
+  border-radius: 0 !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* Innenlayout der Topbar */
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px; /* ~h-14 */
+}
