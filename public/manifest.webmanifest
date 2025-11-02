@@ -1,0 +1,12 @@
+// FILE: public/manifest.webmanifest
+{
+  "name": "bembe-app",
+  "short_name": "bembe-app",
+  "description": "Interne App",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#0B1624",
+  "background_color": "#0B1624",
+  "icons": []
+}

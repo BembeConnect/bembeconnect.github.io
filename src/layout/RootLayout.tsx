@@ -1,3 +1,4 @@
+// FILE: src/layout/RootLayout.tsx
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import styles from './RootLayout.module.css'
 
@@ -17,11 +18,19 @@ export default function RootLayout() {
             >
               Home
             </NavLink>
+
             <NavLink
-              to="/about"
+              to="/ma"
               className={({ isActive }) => (isActive ? 'text-white' : 'text-slate-400')}
             >
-              About
+              MA
+            </NavLink>
+
+            <NavLink
+              to="/pkl"
+              className={({ isActive }) => (isActive ? 'text-white' : 'text-slate-400')}
+            >
+              PKL
             </NavLink>
           </nav>
         </div>
@@ -34,7 +43,9 @@ export default function RootLayout() {
       </main>
 
       <footer className={styles.footer}>
-        <div className="container mx-auto px-4 py-4">© {new Date().getFullYear()} bembe-app</div>
+        <div className="container mx-auto px-4 py-4">
+          © {new Date().getFullYear()} bembe-app
+        </div>
       </footer>
     </div>
   )

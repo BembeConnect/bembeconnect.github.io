@@ -1,0 +1,45 @@
+<!-- FILE: public/offline.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
+    <title>bembe-app · Offline</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body {
+        margin: 0; padding: 0; height: 100%;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+        background: #0b1624; color: #e6eef8;
+      }
+      .wrap {
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        text-align: center;
+      }
+      .card {
+        border: 1px solid #2b4c73;
+        background: #0f2030;
+        border-radius: 12px;
+        padding: 24px 28px;
+        max-width: 560px;
+        width: 100%;
+      }
+      h1 { margin: 0 0 8px; font-size: 22px; }
+      p { margin: 0; opacity: .85; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Offline</h1>
+        <p>Keine Verbindung. Inhalte werden neu geladen, sobald das Netzwerk wieder verfügbar ist.</p>
+      </div>
+    </div>
+  </body>
+</html>

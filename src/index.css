@@ -1,13 +1,24 @@
+/* FILE: src/index.css */
+
+/* 1) Quicksand einbinden (Google Fonts) */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+/* 2) Tailwind-Basis (wie gehabt) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-#root {
-  height: 100%;
-}
-body {
-  background: #0b1220;
-  color: #eaf2ff;
+/* 3) Globale Typografie */
+@layer base {
+  html, body, #root {
+    font-family: "Quicksand", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol";
+    @apply antialiased;
+  }
+
+  /* Überschriften etwas kräftiger – Quicksand bleibt */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+  }
 }
