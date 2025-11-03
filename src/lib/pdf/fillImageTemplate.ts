@@ -4,7 +4,7 @@ import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 export type MappingItem = {
   key: string;
   x: number;
-  y: number;                         // PDF-Punkte, Null unten links
+  y: number;                         // PDF-Punkte, Nullpunkt unten links
   size?: number;                     // Default 10
   align?: "left" | "center" | "right";
   color?: { r: number; g: number; b: number }; // 0..1
@@ -19,10 +19,6 @@ function isJpeg(bytes: Uint8Array) {
   return bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[bytes.length - 2] === 0xff && bytes[bytes.length - 1] === 0xd9;
 }
 
-/** Erzeugt ein 1-seitiges A4-PDF:
- *  - legt PNG/JPG als Vollseiten-Hintergrund
- *  - schreibt Text laut Mapping oben drauf
- */
 export async function fillImageTemplate(
   bgImageArrayBuffer: ArrayBuffer,
   data: FillData,
@@ -64,6 +60,6 @@ export async function fillImageTemplate(
     });
   }
 
-  const bytes = await pdfDoc.save();
-  return new Blob([bytes], { type: "application/pdf" });
+  const bytes = await pdfDoc.save();                 // Uint8Array
+  return new Blob([bytes.buffer], { type: "application/pdf" });
 }
