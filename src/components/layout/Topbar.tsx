@@ -15,7 +15,7 @@ export default function Topbar({ userName, onLogout }: TopbarProps) {
         <div className={`container mx-auto px-4 ${styles.inner}`}>
           {/* Left: Brand + Nav */}
           <div className="flex items-center gap-8">
-            <Link to="/" className="font-semibold tracking-wide text-white no-underline">
+            <Link to="/" className={`font-semibold tracking-wide ${styles.brandGradient}`}>
               BembeConnect
             </Link>
 

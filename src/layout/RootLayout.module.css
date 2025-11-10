@@ -4,8 +4,8 @@
   flex-direction: column;
 }
 .header {
-  border-bottom: 1px solid rgb(30 41 59);
-  background: #111a2b;
+  border-bottom: none; /* Linie kommt aus Topbar */
+  background: transparent; /* Glasoptik der Topbar sichtbar lassen */
 }
 .header a {
   color: #fff;
