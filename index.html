@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,23 +9,11 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BembeConnect (Dev)</title>
-  </head>
+    <script type="module" crossorigin src="/assets/index-CQMmOU3c.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CCfn4n1q.css">
+  <link rel="manifest" href="/manifest.webmanifest"></head>
   <body>
     <div id="root"></div>
-        <script type="module">
-      import { registerSW } from 'virtual:pwa-register'
-      const updateSW = registerSW({
-        immediate: true,
-        onNeedRefresh() { updateSW(true) },
-        onRegisteredSW(_url, reg) { if (reg) setInterval(() => reg.update().catch(() => {}), 60*60*1000) }
-      })
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
-          navigator.serviceWorker?.getRegistration()?.then(r => r?.update()).catch(() => {})
-        }
-      })
-    </script>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
   </html>
 
