@@ -23,7 +23,7 @@ export default function PdfPreviewCanvas({
 
     (async () => {
       const data = await pdfBlob.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data }).promise;
+      const pdf = await (pdfjsLib as any).getDocument({ data }).promise;
       const page = await pdf.getPage(1);
 
       const canvas = canvasRef.current!;
@@ -39,7 +39,8 @@ export default function PdfPreviewCanvas({
       canvas.height = scaled.height;
 
       if (!cancelled) {
-        await page.render({ canvasContext: ctx, viewport: scaled }).promise;
+        // wichtig: canvas mitgeben, damit die TS-Typen passen
+        await page.render({ canvasContext: ctx, viewport: scaled, canvas }).promise;
       }
     })();
 

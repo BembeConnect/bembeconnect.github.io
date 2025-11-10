@@ -1,0 +1,213 @@
+/* src/pages/PKL/history/history.css */
+
+.pkl-history {
+  padding: 1rem;
+}
+
+.pkl-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.pkl-history-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  flex: 1;
+  min-width: 200px;
+}
+
+.pkl-history-back {
+  padding: 0.6rem 1rem;
+  background: rgba(100, 116, 139, 0.15);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  color: #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pkl-history-back:hover {
+  background: rgba(100, 116, 139, 0.25);
+  border-color: rgba(100, 116, 139, 0.4);
+}
+
+/* Grid */
+.pkl-history-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .pkl-history-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pkl-history-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Card */
+.pkl-history-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid rgba(34, 197, 94, 0.3);
+}
+
+.pkl-history-card:hover {
+  transform: translateY(-2px);
+  border-left-color: rgba(34, 197, 94, 0.6);
+}
+
+.pkl-history-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.pkl-history-card-title {
+  margin: 0 0 0.3rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.pkl-history-card-date {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.pkl-history-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid currentColor;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+/* Notes */
+.pkl-history-notes {
+  padding: 0.75rem;
+  background: rgba(59, 130, 246, 0.05);
+  border-left: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 4px;
+}
+
+.pkl-history-notes-label {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pkl-history-notes-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Footer */
+.pkl-history-card-footer {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.pkl-history-btn {
+  padding: 0.55rem 0.85rem;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.pkl-history-btn:hover {
+  background: rgba(34, 197, 94, 0.25);
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.pkl-history-btn:active {
+  transform: scale(0.96);
+}
+
+/* Responsive */
+
+@media (min-width: 640px) {
+  .pkl-history {
+    padding: 1.5rem;
+  }
+
+  .pkl-history-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pkl-history {
+    padding: 2rem;
+  }
+
+  .pkl-history-header h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 374px) {
+  .pkl-history {
+    padding: 0.75rem;
+  }
+
+  .pkl-history-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pkl-history-back {
+    width: 100%;
+    text-align: center;
+  }
+
+  .pkl-history-card-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pkl-history-badge {
+    width: 100%;
+    justify-content: center;
+  }
+}
