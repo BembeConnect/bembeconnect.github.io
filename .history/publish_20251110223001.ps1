@@ -37,13 +37,6 @@ $ItemsToBackup = @(
 Compress-Archive -Path $ItemsToBackup -DestinationPath $zip -Force
 Write-Host "Quick backup created: $zip" -ForegroundColor Green
 
-# Ensure dev index is used as build entry (overwrite any previously deployed index)
-$DevIndex = ".\index.dev.html"
-if (Test-Path $DevIndex) {
-  Copy-Item $DevIndex .\index.html -Force
-  Write-Host "Prepared dev index.html for build." -ForegroundColor Yellow
-}
-
 # 1) Dependencies (idempotent)
 if (-not (Test-Path (Join-Path $Project "node_modules"))) {
   if (Test-Path "package-lock.json") { npm ci } else { npm install }
@@ -54,8 +47,15 @@ Write-Host "Baue Vite..." -ForegroundColor Cyan
 npm run build
 if ($LASTEXITCODE -ne 0) { Fail "Build fehlgeschlagen." }
 
-# 3) Copy dist to root (deploy built files)
+# 3) Copy dist to root (keep source index.html, use built version for deployment)
 $Dist = Join-Path $Project "dist"
+
+# Save source index.html temporarily
+$SourceIndex = ".\index.html"
+$SourceBackup = Join-Path $env:TEMP "index.html.backup"
+if (Test-Path $SourceIndex) {
+  Copy-Item $SourceIndex $SourceBackup -Force
+}
 
 # Clean old artifacts (will copy fresh dist files)
 Remove-Item .\assets -Recurse -Force -ErrorAction SilentlyContinue
@@ -67,11 +67,17 @@ Remove-Item .\404.html   -Force -ErrorAction SilentlyContinue
 # Copy new build
 Copy-Item "$Dist\*" . -Recurse -Force
 
+# Restore source index.html for next build
+if (Test-Path $SourceBackup) {
+  Copy-Item $SourceBackup $SourceIndex -Force
+  Remove-Item $SourceBackup -Force
+}
+
 # SPA fallback for deployment
 Copy-Item .\index.html .\404.html -Force
 Write-Host "dist copied to root, 404.html created." -ForegroundColor Cyan
 
-# 4) Commit and Push (commit the built files)
+# 4) Commit and Push
 if (-not (Test-Path ".git")) { Fail "No Git repo found." }
 git checkout -B $Branch | Out-Null
 
@@ -86,14 +92,5 @@ if ([string]::IsNullOrWhiteSpace($diff)) {
 
 git push -u $Remote $Branch
 if ($LASTEXITCODE -ne 0) { Fail "Push failed." }
-
-# 5) Restore dev index locally (not committed) so `vite dev` works
-$DevIndex = ".\index.dev.html"
-if (Test-Path $DevIndex) {
-  Copy-Item $DevIndex .\index.html -Force
-  Write-Host "Restored index.dev.html → index.html for local dev (not committed)." -ForegroundColor Yellow
-} else {
-  Write-Host "index.dev.html not found; leaving built index.html in place." -ForegroundColor Yellow
-}
 
 Write-Host "Deploy complete!" -ForegroundColor Green

@@ -30,7 +30,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["/offline.html"],
+      includeAssets: ["offline.html"],
       devOptions: {
         enabled: false, // SW im Dev aus → verhindert Cache-Verwirrung
       },
@@ -38,8 +38,8 @@ export default defineConfig({
         name: "bembe-app",
         short_name: "bembe-app",
         description: "Interne App",
-        start_url: "/bembeconnect.github.io/",
-        scope: "/bembeconnect.github.io/",
+        start_url: "/",
+        scope: "/",
         display: "standalone",
         theme_color: "#0B1624",
         background_color: "#0B1624",
@@ -93,5 +93,5 @@ export default defineConfig({
   ],
   // For GitHub Pages (user site at https://bembeconnect.github.io) set the base
   // so built assets are referenced under /bembeconnect.github.io/.
-  base: "/bembeconnect.github.io/",
+  base: "/",
 });

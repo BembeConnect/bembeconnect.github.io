@@ -1,5 +1,5 @@
 # Quick Deploy Script (no backup)
-$Project = "D:\\Bembe\\bembeconnect.github.io"
+$Project = "D:\Bembe\bembeconnect.github.io"
 $Remote  = "origin"
 $Branch  = "main"
 
@@ -13,17 +13,28 @@ Write-Host "Building..." -ForegroundColor Cyan
 npm run build
 if ($LASTEXITCODE -ne 0) { throw "Build failed" }
 
-# Copy dist to root (deploy built files)
+# Copy dist to root
 $Dist = Join-Path $Project "dist"
+$SourceIndex = ".\index.html"
+$SourceBackup = Join-Path $env:TEMP "index.html.backup"
 
-Remove-Item .\\assets -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item .\\index.html -Force -ErrorAction SilentlyContinue
-Remove-Item .\\404.html -Force -ErrorAction SilentlyContinue
+if (Test-Path $SourceIndex) {
+  Copy-Item $SourceIndex $SourceBackup -Force
+}
 
-Copy-Item "$Dist\\*" . -Recurse -Force
+Remove-Item .\assets -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item .\index.html -Force -ErrorAction SilentlyContinue
+Remove-Item .\404.html -Force -ErrorAction SilentlyContinue
 
-Copy-Item .\\index.html .\\404.html -Force
-Write-Host "Files copied to root (built)." -ForegroundColor Green
+Copy-Item "$Dist\*" . -Recurse -Force
+
+if (Test-Path $SourceBackup) {
+  Copy-Item $SourceBackup $SourceIndex -Force
+  Remove-Item $SourceBackup -Force
+}
+
+Copy-Item .\index.html .\404.html -Force
+Write-Host "Files copied to root." -ForegroundColor Green
 
 # Commit and Push
 git add -A
@@ -38,12 +49,5 @@ if ([string]::IsNullOrWhiteSpace($diff)) {
 
 git push -u $Remote $Branch
 if ($LASTEXITCODE -ne 0) { throw "Push failed" }
-
-# Restore dev index locally if available (not committed)
-$DevIndex = ".\\index.dev.html"
-if (Test-Path $DevIndex) {
-  Copy-Item $DevIndex .\\index.html -Force
-  Write-Host "Restored index.dev.html → index.html for local dev (not committed)." -ForegroundColor Yellow
-}
 
 Write-Host "Deploy complete!" -ForegroundColor Green
