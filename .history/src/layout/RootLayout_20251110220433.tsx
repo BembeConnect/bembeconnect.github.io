@@ -25,13 +25,9 @@ export default function RootLayout() {
     navigate('/login', { replace: true })
   }
 
-  // Nicht rendern während session check läuft
+  // Nicht rendern, wenn nicht eingeloggt
   if (!session) {
-    const protectedRoutes = ['/ma', '/pkl']
-    const isProtectedRoute = protectedRoutes.some(route => location.pathname.startsWith(route))
-    if (isProtectedRoute) {
-      return null
-    }
+    return null
   }
 
   return (
@@ -68,17 +64,14 @@ export default function RootLayout() {
               </NavLink>
 
               <span className="text-slate-500">•</span>
-              {session && (
-                <>
-                  <span className="text-xs text-slate-400">{session.name}</span>
-                  <button
-                    onClick={handleLogout}
-                    className="ml-2 px-2 py-1 text-xs bg-red-500/10 border border-red-500/30 text-red-400 rounded hover:bg-red-500/20 transition"
-                  >
-                    Logout
-                  </button>
-                </>
-              )}
+              <span className="text-xs text-slate-400">{session.name}</span>
+
+              <button
+                onClick={handleLogout}
+                className="ml-2 px-2 py-1 text-xs bg-red-500/10 border border-red-500/30 text-red-400 rounded hover:bg-red-500/20 transition"
+              >
+                Logout
+              </button>
             </nav>
           </div>
         </HudBox>
