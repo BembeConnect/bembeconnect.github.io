@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { getSession, clearSession } from '../lib/auth/session'
 import styles from './RootLayout.module.css'
-import HudBox from '../components/ui/HudBox'  // ← gleiches UI-Element wie Buttons
+import HudBox from '../components/ui/HudBox'
 
 export default function RootLayout() {
   const navigate = useNavigate()
@@ -32,7 +32,7 @@ export default function RootLayout() {
         {/* Topbar in HudBox, Hover aus */}
         <HudBox hover={false} padding="md" className="!py-0">
           <div className="container mx-auto flex h-14 items-center justify-between px-4">
-            <Link to="/" className="font-semibold tracking-wide">
+            <Link to="/" className="font-semibold tracking-wide text-white no-underline hover:text-white">
               BembeConnect
             </Link>
 
@@ -59,7 +59,7 @@ export default function RootLayout() {
                 PKL
               </NavLink>
 
-              <span className="text-slate-500">•</span>
+              <span className="text-slate-500">{'\u2022'}</span>
               <span className="text-xs text-slate-400">{session.name}</span>
 
               <button
@@ -87,3 +87,4 @@ export default function RootLayout() {
     </div>
   )
 }
+
