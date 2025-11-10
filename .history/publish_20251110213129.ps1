@@ -16,26 +16,9 @@ function EnsureDir($p){ if(-not(Test-Path $p)){ New-Item -Type Directory -Path $
 # SSH-Key for this repo
 $env:GIT_SSH_COMMAND = "ssh -i .ssh/id_ed25519_bembe"
 
-# 0) Checks and Backup (nur src, dist, public - schneller!)
+# 0) Checks
 if (-not (Test-Path $Project)) { Fail "Project folder not found: $Project" }
 Set-Location $Project
-EnsureDir $Backup
-$stamp = Get-Date -Format "yyyyMMdd_HHmmss"
-$zip   = Join-Path $Backup ("bembe-user_$stamp.zip")
-if (Test-Path $zip) { Remove-Item $zip -Force }
-
-# Backup wichtige Dateien (node_modules nicht nötig - npm ci stellt wieder her)
-$ItemsToBackup = @(
-  (Join-Path $Project "src"),
-  (Join-Path $Project "public"),
-  (Join-Path $Project "dist"),
-  (Join-Path $Project "*.html"),
-  (Join-Path $Project "*.json"),
-  (Join-Path $Project "*.ts"),
-  (Join-Path $Project "*.js")
-)
-Compress-Archive -Path $ItemsToBackup -DestinationPath $zip -Force
-Write-Host "Quick backup created: $zip" -ForegroundColor Green
 
 # 1) Dependencies (idempotent)
 if (-not (Test-Path (Join-Path $Project "node_modules"))) {

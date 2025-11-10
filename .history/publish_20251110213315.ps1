@@ -24,7 +24,7 @@ $stamp = Get-Date -Format "yyyyMMdd_HHmmss"
 $zip   = Join-Path $Backup ("bembe-user_$stamp.zip")
 if (Test-Path $zip) { Remove-Item $zip -Force }
 
-# Backup wichtige Dateien (node_modules nicht nötig - npm ci stellt wieder her)
+# Backup nur wichtige Ordner (nicht node_modules!)
 $ItemsToBackup = @(
   (Join-Path $Project "src"),
   (Join-Path $Project "public"),
