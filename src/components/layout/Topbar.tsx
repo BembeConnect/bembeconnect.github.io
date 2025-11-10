@@ -19,24 +19,14 @@ export default function Topbar({ userName, onLogout }: TopbarProps) {
               BembeConnect
             </Link>
 
-            <nav className="flex gap-6 text-sm">
-              <NavLink
-                to="/"
-                end
-                className={({ isActive }) => (isActive ? "text-white" : "text-slate-400 hover:text-white")}
-              >
+            <nav className={styles.nav}>
+              <NavLink to="/" end className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}>
                 Home
               </NavLink>
-              <NavLink
-                to="/ma"
-                className={({ isActive }) => (isActive ? "text-white" : "text-slate-400 hover:text-white")}
-              >
+              <NavLink to="/ma" className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}>
                 MA
               </NavLink>
-              <NavLink
-                to="/pkl"
-                className={({ isActive }) => (isActive ? "text-white" : "text-slate-400 hover:text-white")}
-              >
+              <NavLink to="/pkl" className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}>
                 PKL
               </NavLink>
             </nav>
@@ -46,12 +36,17 @@ export default function Topbar({ userName, onLogout }: TopbarProps) {
           <div className="flex items-center text-sm">
             {userName ? (
               <>
-                <span className="text-slate-500">{"\u2022"}</span>
-                <span className="text-xs text-slate-400 ml-2">{userName}</span>
+                <span style={{ color: "#64748b" }}>{"\u2022"}</span>
+                <span className="ml-2" style={{ color: "#94a3b8", fontSize: 12 }}>{userName}</span>
                 {onLogout && (
                   <button
                     onClick={onLogout}
-                    className="ml-3 px-2 py-1 text-xs bg-red-500/10 border border-red-500/30 text-red-400 rounded hover:bg-red-500/20 transition"
+                    className="ml-3 px-2 py-1 text-xs rounded transition"
+                    style={{
+                      background: "rgba(239, 68, 68, 0.10)",
+                      border: "1px solid rgba(239, 68, 68, 0.30)",
+                      color: "#f87171",
+                    }}
                   >
                     Logout
                   </button>
